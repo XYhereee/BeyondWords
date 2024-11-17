@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct GameplayButtonView: View {
-    @State var arrayPosition: Int
-    @Binding var situation: ScenarioClass
+    @State var content: String
+    @Binding var progression: [Int]
+    let optionNumber: Int
     var body: some View {
-            Button {
-                
-            } label: {
-                Text("\($situation.sampleScenario.options[arrayPosition])")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundStyle(.white)
-            }
+        Button {
+            progression.append(optionNumber)
+        } label: {
+            Text("\(content)")
+                .padding()
+                .background(Color.blue)
+                .foregroundStyle(.white)
         }
     }
+}
 
 #Preview {
-    @Previewable @State var situation: ScenarioClass = ScenarioClass(image: "stuff", imageCoordinates: [0, 0], imagePosition: 1, options: ["Option 1", "Option 2"], id: "12345")
-    GameplayButtonView(arrayPosition: 0, situation: $situation)
+    @Previewable @State var progression: [Int] = []
+    GameplayButtonView(content: "Option 1", progression: $progression, optionNumber: 1)
 }
